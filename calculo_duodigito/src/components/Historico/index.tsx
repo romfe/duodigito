@@ -8,8 +8,19 @@ interface HistoricoProps {
 export const Historico = (props: HistoricoProps) => {
 
   return (
-    <>
-      Placeholder
-    </>
+    <table>
+      <tr>
+        <th>Resultado</th>
+        <th>Tempo de Execução</th>
+      </tr>
+      <tbody>
+        {props.historico.map((operacao: InterfaceHistorico) =>
+          <tr>
+            <td>{operacao.solucao}</td>
+            <td>{operacao.tempoExecucao}</td>
+          </tr>
+        )}
+      </tbody>
+    </table>
   );
 }
