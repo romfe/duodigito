@@ -1,25 +1,18 @@
 import { useState } from "react";
-//import axios from 'axios';
-import api from '../../api/apiCalculo';
 
+interface EntradaDadosProps {
+  enviarDadosHandler: (numeroEntrada: number) => void
+}
 
-export const EntradaDados = () => {
+export const EntradaDados = (props: EntradaDadosProps) => {
   const [numeroDeEntrada, setNumeroDeEntrada] = useState(0)
-  const changeNumeroHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setNumeroDeEntrada(parseInt(event.target.value))
-  }
-  const enviarDados = async () => {
 
-    if (numeroDeEntrada >= 100) {
-      try {
-        const response = await api.get(`/calculo?input=${numeroDeEntrada}`);
-        console.log(JSON.stringify(response.data));
-      } catch (error) {
-        console.log("[-] Erro!")
-      }
-    } else {
-      console.log("[-] Erro!");
-    }
+  const changeNumeroHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setNumeroDeEntrada(parseInt(event.target.value));
+  }
+
+  const enviarDados = () => {
+    props.enviarDadosHandler(numeroDeEntrada);
   }
   return (
     <>
@@ -28,6 +21,7 @@ export const EntradaDados = () => {
         id="numero"
         name="numero"
         onChange={changeNumeroHandler}
+        placeholder="0"
       />
       <button
         onClick={enviarDados}
