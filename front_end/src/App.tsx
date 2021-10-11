@@ -62,9 +62,9 @@ function App() {
         <Historico
           historico={historicoDeCalculos}
         />
-        <ToastContainer />
-      </div>
 
+      </div>
+      <ToastContainer />
     </>
   );
 }
