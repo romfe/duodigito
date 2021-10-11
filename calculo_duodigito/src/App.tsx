@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { css } from '@emotion/css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { EntradaDados } from './components/EntradaDados';
 import { Historico } from './components/Historico';
@@ -12,22 +14,23 @@ interface InterfaceHistorico {
 
 function App() {
   const [historicoDeCalculos, setHistoricoDeCalculos] = useState<InterfaceHistorico[]>([]);
+
   const enviarDados = async (numero: number) => {
     if (numero >= 100) {
       try {
         const response = await api.get(`/calculo?input=${numero}`);
         setHistoricoDeCalculos([...historicoDeCalculos, response.data]);
-        console.log(historicoDeCalculos);
       } catch (error) {
-        console.log("[-] Erro!");
+        toast.error("Erro na comunicação com o servidor.");
       }
     } else {
-      console.log("[-] Erro!");
+      toast.error("Por favor insira um número maior do que 100.");
     }
   }
 
   return (
-    <div className={css`
+    <>
+      <div className={css`
       font-family:'Roboto', sans-serif;
       margin:0;
       margin-top:2rem;
@@ -48,19 +51,21 @@ function App() {
       top:0;
       left:0;
       right:0;
-      //bottom:0;
       display:flex;
       flex-direction:column;
       align-items:center;
       justify-content:center;
     `}>
-      <EntradaDados
-        enviarDadosHandler={enviarDados}
-      />
-      <Historico
-        historico={historicoDeCalculos}
-      />
-    </div>
+        <EntradaDados
+          enviarDadosHandler={enviarDados}
+        />
+        <Historico
+          historico={historicoDeCalculos}
+        />
+        <ToastContainer />
+      </div>
+
+    </>
   );
 }
 
