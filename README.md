@@ -1,8 +1,8 @@
 # Duodígito :100:
 
-PWA para calcular o mínimo múltiplo duodígito de um número maior do que 100 informado pelo usuário.  
+PWA para calcular o mínimo múltiplo duodígito de um número real maior do que 100 informado pelo usuário.  
 
-
+A aplicação pode ser acessada no link: https://romfe.github.io/duodigito-live/
 
 ## Front-End
 
@@ -92,6 +92,7 @@ A seguir, acesse `localhost:3000` no seu browser
 * Java :coffee: 11.0.11
 * IntelliJ IDEA :id: 2021.2.2
 * Spring Boot :leaves: 2.5.5 
+* Maven :bird: 3.6.0
 
 
 
