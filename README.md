@@ -36,17 +36,9 @@ PWA para calcular o mínimo múltiplo duodígito de um número maior do que 100 
 
 * create-react-app `https://create-react-app.dev/`
 
-`yarn create react-app calculo_duodigito` 
-
 * Emotion `https://emotion.sh/docs/introduction`
 
-`         yarn add @emotion/react`
-
-`         yarn add @emotion/css`
-
 * Toastify `https://www.npmjs.com/package/react-toastify`
-
-`         yarn add react-toastify`
 
 
 
