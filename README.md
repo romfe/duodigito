@@ -66,7 +66,7 @@ A seguir, acesse `localhost:3000` no seu browser
 
 * O usuário deve informar um número real
 * O usuário não pode entrar com um número que seja menor do que 100
-* O usuário pode fazer até 30 consultas à API por sessão, para que a página permaneça legível
+* O usuário pode fazer até 30 consultas à API por sessão
 * Caso a API não consiga calcular uma solução satisfatória, o usuário é informado através de uma mensagem de erro
 
 

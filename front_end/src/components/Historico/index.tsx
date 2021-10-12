@@ -17,7 +17,7 @@ export const Historico = (props: HistoricoProps) => {
 
     // tabela do histórico de consultas
     <table className={css`
-      margin-top:1rem;
+      margin-top:0;
       border-spacing: 0 0.5rem;
       tr{
         color:#363F5F;
