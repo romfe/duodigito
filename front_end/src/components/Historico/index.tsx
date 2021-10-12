@@ -1,23 +1,28 @@
+// importação das bibliotecas
 import { css } from '@emotion/css';
 
 interface InterfaceHistorico {
   solucao: number,
   tempoExecucao: number
 }
+
 interface HistoricoProps {
   historico: InterfaceHistorico[]
 }
+
 export const Historico = (props: HistoricoProps) => {
 
   return (
+
+    // tabela do histórico de consultas
     <table className={css`
-      margin-top:4remm;
+      margin-top:4rem30;
       border-spacing: 0 0.5rem;
       tr{
         color:#363F5F;
         font-weight:400;
         padding: 1rem 2rem;
-        text-align:left;
+        text-align:center;
         line-height:1.5rem;
       }
       td{
@@ -26,15 +31,18 @@ export const Historico = (props: HistoricoProps) => {
         background: #FFFFFF;
         color:#363F5F;
         border-radius:.25rem;
+        text-align:center;
       }
     `}>
-      <tr>
-        <td>Resultado</td>
-        <td>Tempo de Execução</td>
-      </tr>
+      <thead>
+        <tr>
+          <td>Mínimo Múltiplo Duodígito</td>
+          <td>Tempo de Execução (em nanossegundos)</td>
+        </tr>
+      </thead>
       <tbody>
         {props.historico.map((operacao: InterfaceHistorico) =>
-          <tr>
+          <tr key={Math.random()}>
             <td>{operacao.solucao}</td>
             <td>{operacao.tempoExecucao}</td>
           </tr>

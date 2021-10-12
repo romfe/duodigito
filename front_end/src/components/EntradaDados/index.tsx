@@ -1,3 +1,4 @@
+// importação das bibliotecas da aplicação
 import { useState } from "react";
 import { css } from '@emotion/css';
 
@@ -6,15 +7,19 @@ interface EntradaDadosProps {
 }
 
 export const EntradaDados = (props: EntradaDadosProps) => {
+
+  // estado que armazena o número informado pelo usuário
   const [numeroDeEntrada, setNumeroDeEntrada] = useState(0)
 
   const changeNumeroHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setNumeroDeEntrada(parseInt(event.target.value));
+    setNumeroDeEntrada(parseFloat(event.target.value));
   }
+
 
   const enviarDados = () => {
     props.enviarDadosHandler(numeroDeEntrada);
   }
+
   return (
     <>
       <input
