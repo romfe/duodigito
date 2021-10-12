@@ -1,24 +1,25 @@
 //importação de bibliotecas
-import { useState } from 'react';
-import { css } from '@emotion/css';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { useState } from "react";
+import { css } from "@emotion/css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 //importação de componentes da aplicação
-import { EntradaDados } from './components/EntradaDados';
-import { Historico } from './components/Historico';
-import api from './api/apiCalculo';
-
+import api from "./api/apiCalculo";
+import { EntradaDados } from "./components/EntradaDados";
+import { Historico } from "./components/Historico";
 
 interface InterfaceHistorico {
-  solucao: number,
-  numeroInicial: number,
-  tempoExecucao: number
+  solucao: number;
+  numeroInicial: number;
+  tempoExecucao: number;
 }
 
 function App() {
   // estado para armazenar o histórico de consultas do usuário
-  const [historicoDeCalculos, setHistoricoDeCalculos] = useState<InterfaceHistorico[]>([]);
+  const [historicoDeCalculos, setHistoricoDeCalculos] = useState<
+    InterfaceHistorico[]
+  >([]);
 
   // variável que armazena o máximo de consultas permitidas pelo usuário por sessão
   const numeroMaximoDeConsultas: number = 30;
@@ -27,26 +28,25 @@ function App() {
   // também verifica o número informado pelo usuário e exibe mensagens de erro
   const enviarDados = async (numero: number) => {
     if (numero > 100) {
-
       if (historicoDeCalculos.length >= numeroMaximoDeConsultas) {
-
-        toast.error("Número máximo de consultas atingido. Atualize a página e tente novamente")
-
+        toast.error(
+          "Número máximo de consultas atingido. Atualize a página e tente novamente"
+        );
       } else {
-
         try {
-
           const response = await api.get(`/calculo?input=${numero}`);
-          const existeSolucao: InterfaceHistorico = (response.data);
+          const existeSolucao: InterfaceHistorico = response.data;
 
           if (existeSolucao.solucao === 0) {
             // caso a API não tenha encontrado solução, retorna o valor 0
             // a mensagem de erro é exibida ao usuário
-            toast.error("Não foi encontrada solução. Verifique o número informado");
+            toast.error(
+              "Não foi encontrada solução. Verifique o número informado"
+            );
           } else {
-
-            // caso a API retorne um valor válido, a nova resposta é armazenada 
+            // caso a API retorne um valor válido, a nova resposta é armazenada
             setHistoricoDeCalculos([...historicoDeCalculos, response.data]);
+            toast.success(`O menor múltiplo duodígito é ${existeSolucao.solucao}`);
           }
         } catch (error) {
           toast.error("Erro na comunicação com o servidor.");
@@ -55,46 +55,80 @@ function App() {
     } else {
       toast.error("Por favor insira um número maior do que 100.");
     }
-  }
+  };
 
   return (
-    <>
-      <div className={css`
-      font-family:'Roboto', sans-serif;
-      margin:0;
-      margin-top:2rem;
-      padding:0;
-      box-sizing:border-box;
-      html{
-        @media(max-width:1080px){ 
-          font-size:93.75%;
-        }
-        @media(max-width:720px){ 
-          font-size:87.5%;
-        }
-      }
-      button{ 
-        cursor:pointer;
-      }
-      top:0;
-      left:0;
-      right:0;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-    `}>
-        <EntradaDados
-          enviarDadosHandler={enviarDados}
-        />
-        <Historico
-          historico={historicoDeCalculos}
-        />
+    <main className={styles.container}>
 
-      </div>
+      {/*Seção da entrada de dados*/}
+      <section className={styles.calculoSection}>
+        <div className={styles.groupContainer}>
+          <h2>Cálculo Duodígito</h2>
+          <EntradaDados enviarDadosHandler={enviarDados} />
+        </div>
+      </section>
+
+      {/*Seção do histórico de consultas*/}
+      <section className={styles.historicoSection}>
+        <div className={styles.groupContainer}>
+          <h2>Histórico</h2>
+          <Historico historico={historicoDeCalculos} />
+        </div>
+      </section>
+
       <ToastContainer />
-    </>
+    </main>
   );
 }
+
+const styles = {
+  container: css`
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+
+    @media (max-width: 720px) {
+      flex-direction: column;
+    }
+  `,
+
+  calculoSection: css`
+    width: 50vw;
+    background: #0099ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    @media (max-width: 720px) {
+      width: 100vw;
+      height: 50vh;
+    }
+  `,
+
+  historicoSection: css`
+    width: 50vw;
+    background: #fff;
+    display: flex;
+    margin-top: 50px;
+    align-items: center;
+    flex-direction: column;
+
+    @media (max-width: 720px) {
+      width: 100vw;
+      height: 50vh;
+    }
+  `,
+
+  groupContainer: css`
+    max-width: 80%;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+  `,
+};
 
 export default App;

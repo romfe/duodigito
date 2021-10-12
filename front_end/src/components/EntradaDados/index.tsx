@@ -9,7 +9,7 @@ export const EntradaDados = (props: EntradaDadosProps) => {
   const [numeroDeEntrada, setNumeroDeEntrada] = useState(0);
 
   const changeNumeroHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setNumeroDeEntrada(parseInt(event.target.value));
+    setNumeroDeEntrada(parseFloat(event.target.value));
   };
 
   const executarComEnter = (keyboardEvent: React.KeyboardEvent<HTMLInputElement>) => {
