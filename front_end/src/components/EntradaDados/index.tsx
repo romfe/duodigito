@@ -15,7 +15,11 @@ export const EntradaDados = (props: EntradaDadosProps) => {
     setNumeroDeEntrada(parseFloat(event.target.value));
   }
 
-
+  const executarComEnter = (keyboardEvent: React.KeyboardEvent<HTMLInputElement>) => {
+    if (keyboardEvent.key === 'Enter') {
+      enviarDados();
+    }
+  }
   const enviarDados = () => {
     props.enviarDadosHandler(numeroDeEntrada);
   }
@@ -28,6 +32,7 @@ export const EntradaDados = (props: EntradaDadosProps) => {
         name="numero"
         onChange={changeNumeroHandler}
         placeholder="0"
+        onKeyDown={executarComEnter} // envia os dados à API ao pressionar enter
         className={css`
         margin-top:2rem;
         padding: 0 1.5rem;

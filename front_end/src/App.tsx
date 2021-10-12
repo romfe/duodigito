@@ -12,6 +12,7 @@ import api from './api/apiCalculo';
 
 interface InterfaceHistorico {
   solucao: number,
+  numeroInicial: number,
   tempoExecucao: number
 }
 

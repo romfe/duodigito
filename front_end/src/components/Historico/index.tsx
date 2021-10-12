@@ -3,6 +3,7 @@ import { css } from '@emotion/css';
 
 interface InterfaceHistorico {
   solucao: number,
+  numeroInicial: number,
   tempoExecucao: number
 }
 
@@ -16,7 +17,7 @@ export const Historico = (props: HistoricoProps) => {
 
     // tabela do histórico de consultas
     <table className={css`
-      margin-top:4rem30;
+      margin-top:1rem;
       border-spacing: 0 0.5rem;
       tr{
         color:#363F5F;
@@ -36,18 +37,22 @@ export const Historico = (props: HistoricoProps) => {
     `}>
       <thead>
         <tr>
+          <td>Número</td>
           <td>Mínimo Múltiplo Duodígito</td>
-          <td>Tempo de Execução (em nanossegundos)</td>
+          <td>Tempo (em nanossegundos)</td>
         </tr>
       </thead>
+
       <tbody>
         {props.historico.map((operacao: InterfaceHistorico) =>
           <tr key={Math.random()}>
+            <td>{operacao.numeroInicial}</td>
             <td>{operacao.solucao}</td>
             <td>{operacao.tempoExecucao}</td>
           </tr>
         )}
       </tbody>
+
     </table>
   );
 }

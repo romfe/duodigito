@@ -67,15 +67,15 @@ public class CalculoController {
                 multiplicador++;
 
                 // para evitar que o programa rode indefinidamente
-                if (multiplicador > 1000000) return new Calculo(0.0, 0);
+                if (multiplicador > 10000000) return new Calculo(0.0, 0.0, 0);
 
             }catch(Exception err){
-                return new Calculo(0.0, 0);
+                return new Calculo(0.0, 0.0, 0);
             }
         }
 
 
         long tempo = tempoExecucao(System.nanoTime(), horaComeco); // método do cálculo do tempo de execução
-        return new Calculo(menorMultiploDuodigito, tempo);
+        return new Calculo(menorMultiploDuodigito, numeroEntrada, tempo);
     }
 }
