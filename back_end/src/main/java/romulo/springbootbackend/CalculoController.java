@@ -43,7 +43,7 @@ public class CalculoController {
 
             try {
                 novoMultiplo = multiplicador * numeroEntrada; // cálculo do múltiplo seguinte
-                numeroString = Double.toString(novoMultiplo).replace(".", "");
+                numeroString = String.valueOf(novoMultiplo).replace(".", "");
 
                 // condicional para remover o último zero depois da vírgula, caso exista
                 if (numeroString.charAt(numeroString.length() - 1) == '0') {
